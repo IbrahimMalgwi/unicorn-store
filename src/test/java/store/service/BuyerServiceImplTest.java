@@ -21,7 +21,7 @@ class BuyerServiceImplTest {
         firstBuyerRegisterRequest.setEmail("judithibrahim@gmail.com");
         firstBuyerRegisterRequest.setAddress("312, Herbert Macaulay Way, Sabo Yaba, Lagos");
         firstBuyerRegisterRequest.setPassword("ILoveDaddy2022@");
-        firstBuyerRegisterRequest.setPhoneNumber("080122222345678");
+        firstBuyerRegisterRequest.setPhoneNumber("08012345678");
 
         secondBuyerRegisterRequest = new BuyerRegistrationRequest();
         secondBuyerRegisterRequest.setEmail("joannaibrahim@gmail.com");
@@ -29,6 +29,7 @@ class BuyerServiceImplTest {
         secondBuyerRegisterRequest.setPassword("ILoveDaddy2022@");
         secondBuyerRegisterRequest.setPhoneNumber("08012345679");
     }
+
 
     @Test
     void register() {
