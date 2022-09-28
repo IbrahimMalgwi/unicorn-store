@@ -6,9 +6,11 @@ import org.junit.jupiter.api.Test;
 import static org.junit.jupiter.api.Assertions.*;
 
 class BuyerServiceImplTest {
+    private final BuyerService buyerService = new BuyerServiceImpl();
 
     @BeforeEach
     void setUp() {
+
     }
 
     @Test
