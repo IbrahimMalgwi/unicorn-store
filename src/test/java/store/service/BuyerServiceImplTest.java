@@ -5,6 +5,7 @@ import org.junit.jupiter.api.Test;
 import store.data.dto.BuyerRegistrationRequest;
 import store.data.dto.BuyerRegistrationResponse;
 import store.data.models.Buyer;
+import store.exception.BuyerRegistrationException;
 
 import static org.junit.jupiter.api.Assertions.*;
 
@@ -26,7 +27,7 @@ class BuyerServiceImplTest {
         secondBuyerRegisterRequest = new BuyerRegistrationRequest();
         secondBuyerRegisterRequest.setEmail("joannaibrahim@gmail.com");
         secondBuyerRegisterRequest.setAddress("313, Herbert Macaulay Way, Sabo Yaba");
-        secondBuyerRegisterRequest.setPassword("ILoveDaddy2022@");
+        secondBuyerRegisterRequest.setPassword("ILoveDaddy-2022@");
         secondBuyerRegisterRequest.setPhoneNumber("08012345679");
     }
 
@@ -34,8 +35,14 @@ class BuyerServiceImplTest {
     @Test
     void register() {
         BuyerRegistrationResponse response = buyerService.register(firstBuyerRegisterRequest);
+        System.out.println(response);
         assertNotNull(response);
         assertEquals(response.getStatusCode(), 201);
+    }
+
+    @Test
+    void userWithInvalidDetailsGetsExceptionWhenRegisteringTest(){
+        assertThrows(BuyerRegistrationException.class, ()-> buyerService.register(secondBuyerRegisterRequest));
     }
 
     @Test
