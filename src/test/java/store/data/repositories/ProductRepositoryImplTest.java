@@ -44,4 +44,19 @@ class ProductRepositoryImplTest {
         assertThrows(ProductNotFoundException.class, ()-> productRepository.findById(900));
     }
 
+    @Test
+    void findall(){
+
+    }
+
+    @Test
+    void delete(){
+
+    }
+
+    @Test
+    void addProduct(){
+
+    }
+
 }
