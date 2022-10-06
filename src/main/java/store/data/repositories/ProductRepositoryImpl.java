@@ -2,6 +2,7 @@ package store.data.repositories;
 
 import lombok.Data;
 import store.data.models.Product;
+import store.exception.ProductNotFoundException;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -26,7 +27,11 @@ public class ProductRepositoryImpl implements ProductRepository{
 
     @Override
     public Product findById(int id) {
-        return null;
+        for (Product product : products ){
+            if (product.getId() == id) return product;
+        }
+        throw new ProductNotFoundException("" +
+                String.format("Product with id %d doesn't exsit", id));
     }
 
     @Override
