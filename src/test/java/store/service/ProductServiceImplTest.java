@@ -17,7 +17,7 @@ class ProductServiceImplTest {
         addProductRequest = new AddProductRequest();
         addProductRequest.setName("Coke");
         addProductRequest.setPrice(150);
-        addProductRequest.setCategory("Beverages");
+        addProductRequest.setCategory("BEVERAGES");
     }
 
     @Test
