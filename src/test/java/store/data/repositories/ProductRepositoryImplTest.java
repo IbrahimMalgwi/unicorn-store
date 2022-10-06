@@ -7,6 +7,7 @@ import store.data.models.Product;
 import store.exception.ProductNotFoundException;
 
 import java.math.BigDecimal;
+import java.util.List;
 
 import static org.junit.jupiter.api.Assertions.*;
 
@@ -45,18 +46,20 @@ class ProductRepositoryImplTest {
     }
 
     @Test
-    void findall(){
+    void findAllProductTest(){
+        List<Product> products = productRepository.findAll();
+        assertEquals(0, products.size());
+        productRepository.save(product);
+        List<Product> newProductList = productRepository.findAll();
+        assertEquals(1, newProductList.size());
 
     }
 
     @Test
-    void delete(){
+    void deleteProductTest(){
+        Product savedProduct = productRepository.save(product);
 
     }
 
-    @Test
-    void addProduct(){
-
-    }
 
 }
