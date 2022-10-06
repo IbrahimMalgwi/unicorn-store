@@ -1,12 +1,12 @@
 package store.utils.validators;
 
-import store.data.dto.BuyerRegistrationRequest;
+import store.data.dto.CustomerRegistrationRequest;
 
 public class UserDetailsValidator {
-    private BuyerRegistrationRequest request;
+    private CustomerRegistrationRequest request;
 
     public static boolean isValidPassword(String password) {
-        return password.matches("[a-zA-z0-9(@#$!_)]{8,20}");
+        return password.matches("[a-zA-Z0-9(@#$!_)]{8,20}");
     }
 
     public static boolean isValidPhoneNumber(String phoneNumber) {

@@ -1,0 +1,32 @@
+package store.service;
+
+import lombok.Data;
+import store.data.dto.AddProductRequest;
+import store.data.dto.AddProductResponse;
+import store.data.models.Category;
+import store.data.models.Product;
+import store.data.repositories.ProductRepository;
+import store.data.repositories.ProductRepositoryImpl;
+
+import java.math.BigDecimal;
+
+@Data
+public class ProductServiceImpl implements ProductService{
+
+    private final ProductRepository productRepository = new ProductRepositoryImpl();
+
+    @Override
+    public AddProductResponse addProduct(AddProductRequest addProductRequest) {
+        Product product = new Product();
+        product.setPrice(BigDecimal.valueOf(addProductRequest.getPrice()));
+        product.setCategory(Category.valueOf(addProductRequest.getCategory()));
+        product.setName(addProductRequest.getName());
+        Product savedProduct = productRepository.save(product);
+
+        AddProductResponse response = new AddProductResponse();
+        response.setProductId(savedProduct.getId());
+        response.setMessage("Product created successfully");
+        response.setStatusCode(201);
+        return response;
+    }
+}

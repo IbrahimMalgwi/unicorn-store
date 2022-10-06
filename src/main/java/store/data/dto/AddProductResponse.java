@@ -3,10 +3,8 @@ package store.data.dto;
 import lombok.Data;
 
 @Data
-public class BuyerRegistrationResponse {
-    private int userId;
+public class AddProductResponse {
     private String message;
     private int statusCode;
-
-
+    private int productId;
 }
