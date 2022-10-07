@@ -13,7 +13,8 @@ import static org.junit.jupiter.api.Assertions.*;
 class CustomerRepositoryImplTest {
     private Customer customer;
     private Customer secondCustomer;
-    private static final CustomerRepository CUSTOMER_REPOSITORY = new CustomerRepositoryImpl();
+    private static final CustomerRepository customerRepository
+            = new CustomerRepositoryImpl();
 
     @BeforeEach
     void setUp() {
@@ -33,64 +34,52 @@ class CustomerRepositoryImplTest {
 
     @AfterEach
     void tearDown(){
-        CUSTOMER_REPOSITORY.deleteAll();
+        customerRepository.deleteAll();
     }
 
 
     @Test
     void saveTest() {
-        //before save
-
         assertEquals(0, customer.getId());
-        //saved customer
-        Customer savedCustomer = CUSTOMER_REPOSITORY.save(customer);
-        //customer has id
+        Customer savedCustomer = customerRepository.save(customer);
         assertEquals(1, savedCustomer.getId());
-        //there is one customer un db
-        List<Customer> buyersList = CUSTOMER_REPOSITORY.findAll();
+        List<Customer> buyersList = customerRepository.findAll();
         assertEquals(1, buyersList.size());
 
-        //save second customer
-        Customer savedSecondCustomer = CUSTOMER_REPOSITORY.save(secondCustomer);
-        //second customer's id is 2
+        Customer savedSecondCustomer = customerRepository.save(secondCustomer);
         assertEquals(2, savedSecondCustomer.getId());
-        //there are twi buyers in do
-        buyersList = CUSTOMER_REPOSITORY.findAll();
+        buyersList = customerRepository.findAll();
         assertEquals(2, buyersList.size());
     }
 
     @Test
     void findByIdTest() {
-        Customer firstSavedCustomer = CUSTOMER_REPOSITORY.save(customer);
-        Customer secondSavedCustomer = CUSTOMER_REPOSITORY.save(secondCustomer);
+        Customer firstSavedCustomer = customerRepository.save(customer);
+        Customer secondSavedCustomer =customerRepository.save(secondCustomer);
 
-        Customer foundCustomer = CUSTOMER_REPOSITORY.findById(secondSavedCustomer.getId());
+        Customer foundCustomer = customerRepository.findById(secondSavedCustomer.getId());
         assertEquals(foundCustomer, secondSavedCustomer);
-
     }
 
     @Test
     void findAllTest() {
-        CUSTOMER_REPOSITORY.save(customer);
-        var listOfALlBuyersInDb = CUSTOMER_REPOSITORY.findAll();
+        customerRepository.save(customer);
+        var listOfALlBuyersInDb = customerRepository.findAll();
         assertEquals(1, listOfALlBuyersInDb.size());
     }
 
     @Test
     void deleteTest() {
-     Customer customer1 = CUSTOMER_REPOSITORY.save(customer);
-     Customer customer2 = CUSTOMER_REPOSITORY.save(customer);
-     var listOfAllBuyersInDb = CUSTOMER_REPOSITORY.findAll();
-     assertEquals(2, listOfAllBuyersInDb.size());
-//     var deleteBuyer = CUSTOMER_REPOSITORY.delete(customer2);
-     assertEquals(1, listOfAllBuyersInDb.size());
+     Customer savedCustomer = customerRepository.save(customer);
+     customerRepository.delete(savedCustomer);
+     assertFalse(customerRepository.findAll().contains(savedCustomer));
     }
 
     @Test
     void deleteAllTest(){
-        CUSTOMER_REPOSITORY.save(customer);
-        assertEquals(1, CUSTOMER_REPOSITORY.findAll().size());
-        CUSTOMER_REPOSITORY.deleteAll();
-        assertEquals(0, CUSTOMER_REPOSITORY.findAll().size());
+        customerRepository.save(customer);
+        assertEquals(1, customerRepository.findAll().size());
+        customerRepository.deleteAll();
+        assertEquals(0, customerRepository.findAll().size());
     }
 }

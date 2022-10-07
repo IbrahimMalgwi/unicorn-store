@@ -58,7 +58,8 @@ class ProductRepositoryImplTest {
     @Test
     void deleteProductTest(){
         Product savedProduct = productRepository.save(product);
-
+        productRepository.delete(savedProduct);
+        assertThrows(ProductNotFoundException.class, ()->productRepository.findById(savedProduct.getId()));
     }
 
 

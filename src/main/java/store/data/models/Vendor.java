@@ -10,7 +10,10 @@ import java.util.Set;
 @Getter
 @Setter
 @ToString
-public class Vendor {
+@Builder
+public class Vendor extends User {
+    private int id;
     private String storeName;
-    private Set<String> storeAddress = new HashSet<>();
+    private Set<String> storeAddress;
+
 }

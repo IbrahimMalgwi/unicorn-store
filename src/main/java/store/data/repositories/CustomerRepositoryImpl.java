@@ -28,12 +28,21 @@ public class CustomerRepositoryImpl implements CustomerRepository {
     }
 
     @Override
+    public Customer findByEmail(String email) {
+        for (Customer customer:customers){
+            if (customer.getEmail().equals(email)) return customer;
+        }
+        throw new StoreException("Customer not found");
+    }
+
+    @Override
     public List<Customer> findAll() {
         return customers;
     }
 
     @Override
     public void delete(Customer customer) {
+        customers.remove(customer);
 
     }
 

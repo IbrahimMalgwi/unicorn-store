@@ -1,10 +1,9 @@
-package store.data.models;
+package store.data.dto;
 
 import lombok.Data;
 
 @Data
-public class User {
+public class LoginRequest {
     private String email;
     private String password;
-    private String phoneNumber;
 }

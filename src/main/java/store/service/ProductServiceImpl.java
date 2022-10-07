@@ -10,7 +10,6 @@ import store.data.repositories.ProductRepositoryImpl;
 
 import java.math.BigDecimal;
 
-@Data
 public class ProductServiceImpl implements ProductService{
 
     private final ProductRepository productRepository = new ProductRepositoryImpl();
@@ -19,7 +18,7 @@ public class ProductServiceImpl implements ProductService{
     public AddProductResponse addProduct(AddProductRequest addProductRequest) {
         Product product = new Product();
         product.setPrice(BigDecimal.valueOf(addProductRequest.getPrice()));
-        product.setCategory(Category.valueOf(addProductRequest.getCategory()));
+        product.setCategory(Category.valueOf(addProductRequest.getCategory().toUpperCase()));
         product.setName(addProductRequest.getName());
         Product savedProduct = productRepository.save(product);
 
@@ -28,5 +27,10 @@ public class ProductServiceImpl implements ProductService{
         response.setMessage("Product created successfully");
         response.setStatusCode(201);
         return response;
+    }
+
+    @Override
+    public Product getProductById(int id) {
+        return productRepository.findById(id);
     }
 }

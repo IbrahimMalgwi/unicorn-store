@@ -22,7 +22,8 @@ public class ProductRepositoryImpl implements ProductRepository{
 
     private int generateId() {
         int listSize  = products.size();
-        return listSize+1;
+        int newId = listSize+1;
+        return newId;
     }
 
     @Override
@@ -31,7 +32,7 @@ public class ProductRepositoryImpl implements ProductRepository{
             if (product.getId() == id) return product;
         }
         throw new ProductNotFoundException("" +
-                String.format("Product with id %d doesn't exsit", id));
+                String.format("Product with id %d doesn't exist", id));
     }
 
     @Override
@@ -41,6 +42,6 @@ public class ProductRepositoryImpl implements ProductRepository{
 
     @Override
     public void delete(Product product) {
-
+        products.remove(product);
     }
 }

@@ -1,12 +1,12 @@
 package store.service;
 
-import store.data.dto.CustomerRegistrationRequest;
-import store.data.dto.CustomerRegistrationResponse;
-import store.data.dto.ProductPurchaseRequest;
+import store.data.dto.*;
 import store.data.models.Customer;
+import store.data.models.Product;
 import store.data.repositories.CustomerRepository;
 import store.data.repositories.CustomerRepositoryImpl;
 import store.exception.CustomerRegistrationException;
+import store.exception.StoreException;
 import store.utils.validators.UserDetailsValidator;
 
 import java.util.Set;
@@ -32,12 +32,22 @@ public class CustomerServiceImpl implements CustomerService {
         return response;
     }
 
+    @Override
+    public LoginResponse login(LoginRequest loginRequest) {
+        Customer foundCustomer = customerRepository.findByEmail(loginRequest.getEmail());
+        LoginResponse loginResponse = new LoginResponse();
+        if (foundCustomer.getPassword().equals(loginRequest.getPassword())){
+            loginResponse.setMessage("successful login");
+            return loginResponse;
+        }loginResponse.setMessage("authentication failed");
+        return loginResponse;
+    }
+
     private CustomerRegistrationResponse buildBuyerRegistrationResponse(Customer savedCustomer) {
         CustomerRegistrationResponse response = new CustomerRegistrationResponse();
         response.setMessage("User registration successful");
         response.setStatusCode(201);
         response.setUserId(savedCustomer.getId());
-
         return response;
     }
 
@@ -53,7 +63,15 @@ public class CustomerServiceImpl implements CustomerService {
 
     @Override
     public String orderProduct(ProductPurchaseRequest productPurchaseRequest) {
-
-        return null;
+        Customer customer = customerRepository.findById(productPurchaseRequest.getCustomerId());
+        Product product = productService.getProductById(productPurchaseRequest.getProductId());
+        if (product == null) throw new StoreException("product not found");
+        if (product.getQuantity()>= productPurchaseRequest.getQuantity()){
+            customer.getOrders().add(product);
+            customerRepository.save(customer);
+            return "order successful";
+        } else {
+            throw new StoreException("order quantity larger than available quantity");
+        }
     }
 }
