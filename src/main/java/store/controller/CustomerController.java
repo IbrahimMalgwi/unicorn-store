@@ -13,11 +13,12 @@ import store.service.CustomerServiceImpl;
 @RequestMapping("/api/v1/customer")
 public class CustomerController {
 
-    private CustomerService customerService = new CustomerServiceImpl();
+    private final CustomerService customerService = new CustomerServiceImpl();
 
     @PostMapping("/register")
     public CustomerRegistrationResponse register(@RequestBody CustomerRegistrationRequest customerRegistrationRequest) {
         CustomerRegistrationResponse response = customerService.register(customerRegistrationRequest);
         return response;
+
     }
 }

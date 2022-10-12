@@ -13,8 +13,7 @@ import static org.junit.jupiter.api.Assertions.*;
 class CustomerRepositoryImplTest {
     private Customer customer;
     private Customer secondCustomer;
-    private static final CustomerRepository customerRepository
-            = new CustomerRepositoryImpl();
+    private static final CustomerRepository customerRepository = new CustomerRepositoryImpl();
 
     @BeforeEach
     void setUp() {
