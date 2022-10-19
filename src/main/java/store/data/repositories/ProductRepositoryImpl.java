@@ -14,18 +14,20 @@ public class ProductRepositoryImpl implements ProductRepository{
 
     @Override
     public Product save(Product product) {
-        if (product.getId()>0){
-            for (int i = 0; i < products.size(); i++) {
-                if (products.get(i).getId()==product.getId()){
-                    products.add(i, product);
-                    return product;
-                }
-            }
-        }
+        if (product.getId()>0) return replaceProductInDb(product);
         int newId = generateId();
         product.setId(newId);
         products.add(product);
         return product;
+    }
+    private Product replaceProductInDb(Product product){
+        for (int i = 0; i < products.size(); i++) {
+            if (products.get(i).getId()==product.getId()){
+                products.add(i, product);
+                return product;
+            }
+        }
+        return null;
     }
 
     private int generateId() {
