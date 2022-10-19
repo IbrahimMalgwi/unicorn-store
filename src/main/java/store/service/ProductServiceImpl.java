@@ -10,7 +10,7 @@ import store.data.repositories.ProductRepositoryImpl;
 
 import java.math.BigDecimal;
 
-public class ProductServiceImpl implements ProductService{
+public class ProductServiceImpl implements ProductService {
 
     private final ProductRepository productRepository = new ProductRepositoryImpl();
 
@@ -33,4 +33,5 @@ public class ProductServiceImpl implements ProductService{
     public Product getProductById(int id) {
         return productRepository.findById(id);
     }
+
 }

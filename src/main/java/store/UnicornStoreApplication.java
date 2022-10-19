@@ -52,7 +52,6 @@ public class UnicornStoreApplication {
 
         System.out.println("Enter your password: ");
         String password = scanner.next();
-        System.out.println("Password::" + password);
 
         System.out.println("Enter your phone-number: ");
         String phoneNumber = scanner.next();
@@ -88,7 +87,6 @@ public class UnicornStoreApplication {
         System.out.println("""
                             RESGISTER
                         """);
-
     }
 
     private static void displayLoginHeader(){

@@ -14,6 +14,14 @@ public class ProductRepositoryImpl implements ProductRepository{
 
     @Override
     public Product save(Product product) {
+        if (product.getId()>0){
+            for (int i = 0; i < products.size(); i++) {
+                if (products.get(i).getId()==product.getId()){
+                    products.add(i, product);
+                    return product;
+                }
+            }
+        }
         int newId = generateId();
         product.setId(newId);
         products.add(product);

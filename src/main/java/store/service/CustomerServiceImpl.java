@@ -18,11 +18,14 @@ public class CustomerServiceImpl implements CustomerService {
     @Override
     public CustomerRegistrationResponse register(CustomerRegistrationRequest registrationRequest) {
 
-        if (!UserDetailsValidator.isValidEmailAddress(registrationRequest.getEmail())) throw new CustomerRegistrationException(String.format("email %s is invalid", registrationRequest.getEmail()));
+        if (!UserDetailsValidator.isValidEmailAddress(registrationRequest.getEmail()))
+            throw new CustomerRegistrationException(String.format("email %s is invalid", registrationRequest.getEmail()));
 
-        if (!UserDetailsValidator.isValidPhoneNumber(registrationRequest.getPhoneNumber())) throw new CustomerRegistrationException(String.format("phone number %s is invalid", registrationRequest.getPhoneNumber()));
+        if (!UserDetailsValidator.isValidPhoneNumber(registrationRequest.getPhoneNumber()))
+            throw new CustomerRegistrationException(String.format("phone number %s is invalid", registrationRequest.getPhoneNumber()));
 
-        if (!UserDetailsValidator.isValidPassword(registrationRequest.getPassword())) throw new CustomerRegistrationException(String.format("password %s not valid", registrationRequest.getPassword()));
+        if (!UserDetailsValidator.isValidPassword(registrationRequest.getPassword()))
+            throw new CustomerRegistrationException(String.format("password %s not valid", registrationRequest.getPassword()));
 
         Customer customer = buildBuyer(registrationRequest);
 
