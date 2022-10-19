@@ -1,18 +1,18 @@
 package store.service;
 
-import lombok.Data;
+import lombok.AllArgsConstructor;
 import store.data.dto.AddProductRequest;
 import store.data.dto.AddProductResponse;
 import store.data.models.Category;
 import store.data.models.Product;
 import store.data.repositories.ProductRepository;
-import store.data.repositories.ProductRepositoryImpl;
 
 import java.math.BigDecimal;
 
+@AllArgsConstructor
 public class ProductServiceImpl implements ProductService {
+    private final ProductRepository productRepository;
 
-    private final ProductRepository productRepository = new ProductRepositoryImpl();
 
     @Override
     public AddProductResponse addProduct(AddProductRequest addProductRequest) {

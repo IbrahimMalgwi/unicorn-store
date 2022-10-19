@@ -4,7 +4,6 @@ import store.data.dto.*;
 import store.data.models.Customer;
 import store.data.models.Product;
 import store.data.repositories.CustomerRepository;
-import store.data.repositories.CustomerRepositoryImpl;
 import store.exception.CustomerRegistrationException;
 import store.exception.StoreException;
 import store.utils.validators.UserDetailsValidator;
