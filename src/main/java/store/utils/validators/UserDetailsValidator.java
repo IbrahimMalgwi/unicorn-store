@@ -6,6 +6,7 @@ public class UserDetailsValidator {
     private CustomerRegistrationRequest request;
 
     public static boolean isValidPassword(String password) {
+        System.out.println("match -> "+password.matches("[a-zA-Z0-9(@#$!_)]{8,20}"));
         return password.matches("[a-zA-Z0-9(@#$!_)]{8,20}");
     }
 

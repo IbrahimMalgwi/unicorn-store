@@ -22,7 +22,7 @@ public class CustomerServiceImpl implements CustomerService {
 
         if (!UserDetailsValidator.isValidPhoneNumber(registrationRequest.getPhoneNumber())) throw new CustomerRegistrationException(String.format("phone number %s is invalid", registrationRequest.getPhoneNumber()));
 
-        if (!UserDetailsValidator.isValidPassword(registrationRequest.getPassword())) throw new CustomerRegistrationException(String.format("password %s is weak", registrationRequest.getPassword()));
+        if (!UserDetailsValidator.isValidPassword(registrationRequest.getPassword())) throw new CustomerRegistrationException(String.format("password %s not valid", registrationRequest.getPassword()));
 
         Customer customer = buildBuyer(registrationRequest);
 
