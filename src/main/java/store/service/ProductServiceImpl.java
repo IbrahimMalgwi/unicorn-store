@@ -37,4 +37,8 @@ public class ProductServiceImpl implements ProductService {
         return productRepository.findById(id);
     }
 
+    public Product save(){
+        return productRepository.save();
+    }
+
 }

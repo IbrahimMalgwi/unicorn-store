@@ -14,5 +14,5 @@ public class Product {
     private Category category;
     private int quantity;
 
-
+    List<Integer> numbers = new ArrayList<>();
 }

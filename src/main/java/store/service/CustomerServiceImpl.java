@@ -1,5 +1,7 @@
 package store.service;
 
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Component;
 import store.data.dto.*;
 import store.data.models.Customer;
 import store.data.models.Product;
@@ -10,9 +12,14 @@ import store.utils.validators.UserDetailsValidator;
 
 import java.util.Set;
 
+@Component
 public class CustomerServiceImpl implements CustomerService {
-    private final CustomerRepository customerRepository = new CustomerRepositoryImpl();
-    private final ProductService productService = new ProductServiceImpl();
+
+    @Autowired
+    private CustomerRepository customerRepository;
+
+    @Autowired
+    private ProductService productService ;
 
     @Override
     public CustomerRegistrationResponse register(CustomerRegistrationRequest registrationRequest) {
