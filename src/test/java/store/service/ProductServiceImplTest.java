@@ -9,7 +9,7 @@ import store.data.models.Product;
 import static org.junit.jupiter.api.Assertions.*;
 
 class ProductServiceImplTest {
-    private final ProductService productService = new ProductServiceImpl();
+    private ProductService productService;
 
     private AddProductRequest addProductRequest;
 

@@ -1,6 +1,7 @@
 package store.service;
 
 import lombok.AllArgsConstructor;
+import org.springframework.stereotype.Component;
 import store.data.dto.AddProductRequest;
 import store.data.dto.AddProductResponse;
 import store.data.models.Category;
@@ -10,8 +11,10 @@ import store.data.repositories.ProductRepository;
 import java.math.BigDecimal;
 
 @AllArgsConstructor
+@Component
 public class ProductServiceImpl implements ProductService {
-    private final ProductRepository productRepository;
+
+    private ProductRepository productRepository;
 
 
     @Override
