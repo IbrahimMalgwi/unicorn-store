@@ -1,11 +1,13 @@
 package store.controller;
 
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestBody;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.HttpStatus;
+import org.springframework.http.ResponseEntity;
+import org.springframework.web.bind.annotation.*;
 import store.data.dto.CustomerRegistrationRequest;
 import store.data.dto.CustomerRegistrationResponse;
+import store.exception.BuyerRegistrationException;
+import store.exceptions.BuyerRegistrationException;
 import store.service.CustomerService;
 import store.service.CustomerServiceImpl;
 
@@ -13,12 +15,27 @@ import store.service.CustomerServiceImpl;
 @RequestMapping("/api/v1/customer")
 public class CustomerController {
 
-    private final CustomerService customerService = new CustomerServiceImpl();
+    @Autowired
+    private CustomerService customerService;
 
-    @PostMapping("/register")
-    public CustomerRegistrationResponse register(@RequestBody CustomerRegistrationRequest customerRegistrationRequest) {
-        CustomerRegistrationResponse response = customerService.register(customerRegistrationRequest);
-        return response;
+    @PostMapping()
+    public ResponseEntity<?> register(@RequestBody CustomerRegistrationRequest
+                                              customerRegistrationRequest){
+        try {
+            CustomerRegistrationResponse response =
+                    customerService.register(customerRegistrationRequest);
+            return ResponseEntity.status(HttpStatus.CREATED).body(response);
 
+        }catch (BuyerRegistrationException exception){
+            CustomerRegistrationResponse response = new CustomerRegistrationResponse();
+            response.setMessage(exception.getMessage());
+            response.setStatusCode(401);
+            return ResponseEntity.status(HttpStatus.BAD_REQUEST).body(response);
+        }
+    }
+
+    @GetMapping
+    public ResponseEntity<?> getAllCustomers(){
+        return ResponseEntity.ok(customerService.getAllCustomers());
     }
 }

@@ -2,6 +2,7 @@ package store.service;
 
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
+import org.springframework.beans.factory.annotation.Autowired;
 import store.data.dto.AddProductRequest;
 import store.data.dto.AddProductResponse;
 import store.data.models.Product;
@@ -9,21 +10,24 @@ import store.data.models.Product;
 import static org.junit.jupiter.api.Assertions.*;
 
 class ProductServiceImplTest {
-    private ProductService productService;
+
+    @Autowired
+    private  ProductService productService;
 
     private AddProductRequest addProductRequest;
 
     @BeforeEach
     void setUp() {
         addProductRequest = new AddProductRequest();
-        addProductRequest.setName("Coke");
-        addProductRequest.setPrice(150);
-        addProductRequest.setCategory("BEVERAGES");
+        addProductRequest.setName("Milo");
+        addProductRequest.setPrice(20.00);
+        addProductRequest.setCategory("beverages");
     }
 
     @Test
     void addProductTest() {
-        AddProductResponse response = productService.addProduct(addProductRequest);
+        AddProductResponse response =
+                productService.addProduct(addProductRequest);
         assertNotNull(response);
         assertNotNull(response.getMessage());
         assertEquals(1, response.getProductId());
@@ -31,8 +35,10 @@ class ProductServiceImplTest {
 
     @Test
     void getProductByIdTest(){
-        AddProductResponse response = productService.addProduct(addProductRequest);
-        Product foundProduct = productService.getProductById(response.getProductId());
+        AddProductResponse response =
+                productService.addProduct(addProductRequest);
+        Product foundProduct =
+                productService.getProductById(response.getProductId());
         assertNotNull(foundProduct);
     }
 }

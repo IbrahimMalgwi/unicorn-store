@@ -8,12 +8,4 @@ public class CustomerRegistrationResponse {
     private String message;
     private int statusCode;
 
-    @Override
-    public String toString() {
-        return "{\n" +
-                "\tuserId: " + userId +"\n"+
-                ",\t message: " + message + "\n"+
-                ",\tstatusCode: " + statusCode +"\n"+
-                '}';
-    }
 }
